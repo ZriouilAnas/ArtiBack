@@ -94,6 +94,9 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
+    #[ORM\Column]
+    private ?int $stock = 0;
+
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
@@ -133,4 +136,28 @@ class Product
     {
         return $this->imageName ? '/uploads/products/' . $this->imageName : null;
     }
+
+    
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): static
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function decreaseStock(int $quantity): self
+{
+    $this->stock -= $quantity;
+    return $this;
+}
+
+public function isInStock(int $quantity): bool
+{
+    return $this->stock >= $quantity;
+}
 }

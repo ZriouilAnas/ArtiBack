@@ -28,3 +28,6 @@ services:
       $globalFactory: "@limiter.login"
       $localFactory: "@limiter.login"
       $secret: "%kernel.secret%"
+
+  App\Security\CookieTokenExtractor:
+    arguments: []
